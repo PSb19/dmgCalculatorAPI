@@ -4,6 +4,7 @@ namespace calculator40k.Models
 {
     public class Unit
     {
+        public int ID {get; set;}
         public string? Name {get; set;}
         public int Cost {get; set;}
         public int ModelCount {get; set;}
