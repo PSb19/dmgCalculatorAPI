@@ -1,4 +1,5 @@
 using System;
+using calculator40k.DbModels;
 
 namespace calculator40k.Models
 {
@@ -14,5 +15,16 @@ namespace calculator40k.Models
         public RangedWeapon? ModelRangedWeapon {get; set;}
         // Melee weapon
         public MeleeWeapon? ModelMeleeWeapon {get; set;}
+
+        public Model(){}
+        public Model(DbModel dbModel, RangedWeapon? rangedWeapon = null, MeleeWeapon? meleeWeapon = null){
+            Name = dbModel.Name;
+            Toughness = dbModel.Toughness;
+            Wounds = dbModel.Wounds;
+            Save = dbModel.Save;
+            InvSave = dbModel.InvSave;
+            ModelRangedWeapon = rangedWeapon;
+            ModelMeleeWeapon = meleeWeapon;
+        }
     }
 }

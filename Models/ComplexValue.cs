@@ -3,8 +3,11 @@ namespace calculator40k.Models
     public class ComplexValue
     {
         public string Value {get; set;}
-        public ComplexValue(string value = "err"){
-            Value = value;
+        public ComplexValue(string? value = null){
+            if(!string.IsNullOrEmpty(value))
+                Value = value;
+            else
+                Value = "err";
         }
         public override string ToString(){
             return Value;
