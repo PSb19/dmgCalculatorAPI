@@ -8,7 +8,7 @@ namespace calculator40k.Models
         public int WeaponSkill { get; set; }
         public int Strength { get; set; }
         public int ArmorPiercing { get; set; }
-        public string? Damage { get; set; }
+        public ComplexValue? Damage { get; set; }
         public WeaponTraits Traits {get; set;} = new WeaponTraits();
     }
 }

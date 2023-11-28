@@ -1,4 +1,5 @@
 using calculator40k.Models;
+using calculator40k.DbModels;
 using dmgCalculatorAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ public class InsertController : ControllerBase{
     }
 
     [HttpGet("/return")]
-    public async Task<ActionResult<IEnumerable<Unit>>> GetAllUnits(){
+    public async Task<ActionResult<IEnumerable<DbUnit>>> GetAllUnits(){
         var units = await _context.Units.ToListAsync();
 
         if(units != null){
@@ -26,10 +27,10 @@ public class InsertController : ControllerBase{
     }
 
     [HttpPost]
-    public async Task<ActionResult<Unit>> AddNewUnit(Unit unit){
+    public async Task<ActionResult<DbUnit>> AddNewUnit(DbUnit unit){
         //check unit validity
-        return unit;
-        //TODO: Make this work - every class saved to db has to have key etc
+        // return unit;
+        //TODO: validation etc
         _context.Units.Add(unit);
         await _context.SaveChangesAsync();
         return NoContent();
