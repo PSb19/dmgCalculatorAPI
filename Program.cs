@@ -1,5 +1,5 @@
-using dmgCalculatorAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using dmgCalculatorAPI.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 

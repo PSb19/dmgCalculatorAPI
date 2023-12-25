@@ -12,9 +12,9 @@ namespace calculator40k.Models
         public int InvSave { get; set; }
 
         // Ranged weapon
-        public RangedWeapon? ModelRangedWeapon {get; set;}
+        public RangedWeapon? RangedWeapon {get; set;}
         // Melee weapon
-        public MeleeWeapon? ModelMeleeWeapon {get; set;}
+        public MeleeWeapon? MeleeWeapon {get; set;}
 
         public Model(){}
         public Model(DbModel dbModel, RangedWeapon? rangedWeapon = null, MeleeWeapon? meleeWeapon = null){
@@ -23,8 +23,8 @@ namespace calculator40k.Models
             Wounds = dbModel.Wounds;
             Save = dbModel.Save;
             InvSave = dbModel.InvSave;
-            ModelRangedWeapon = rangedWeapon;
-            ModelMeleeWeapon = meleeWeapon;
+            RangedWeapon = rangedWeapon;
+            MeleeWeapon = meleeWeapon;
         }
     }
 }

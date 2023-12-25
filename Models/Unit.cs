@@ -11,7 +11,8 @@ namespace calculator40k.Models
         public bool IsInfantry {get; set;}
         public bool IsCharacter {get; set;}
         public bool IsVehicle {get; set;}
+        public bool IsPsyker {get; set;}
         // Models List
-        public Model? ModelCharacteristics {get; set;}
+        public Model? Model {get; set;}
     }
 }

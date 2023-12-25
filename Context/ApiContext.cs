@@ -1,7 +1,7 @@
 using calculator40k.DbModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace dmgCalculatorAPI.Models;
+namespace dmgCalculatorAPI.Context;
 
 public class ApiContext : DbContext
 {
