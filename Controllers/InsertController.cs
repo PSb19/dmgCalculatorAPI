@@ -16,15 +16,6 @@ public class InsertController : ControllerBase{
         _context = context;
     }
 
-    [HttpGet("/return")]
-    public async Task<ActionResult<IEnumerable<DbUnit>>> GetAllUnits(){
-        var units = await _context.Units.ToListAsync();
-
-        if(units != null){
-            return units;
-        }
-        return NoContent();
-    }
 
     [HttpPost]
     public async Task<ActionResult<DbUnit>> AddNewUnit(DbUnit unit){
