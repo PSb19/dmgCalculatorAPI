@@ -30,5 +30,16 @@ namespace calculator40k.Models
             //improve
             Model = new(dbModel, rw, mw);
         }
+        public Unit(DbUnit dbUnit, DbModel dbModel, DbRangedWeapon rw, DbMeleeWeapon mw){
+            ID = dbUnit.ID;
+            Name = dbUnit.Name;
+            Cost = dbUnit.Cost;
+            ModelCount = dbUnit.ModelCount;
+            IsInfantry = dbUnit.IsInfantry;
+            IsCharacter = dbUnit.IsCharacter;
+            IsVehicle = dbUnit.IsVehicle;
+            IsPsyker = dbUnit.IsPsyker;
+            Model = new(dbModel, rw, mw);
+        }
     }
 }

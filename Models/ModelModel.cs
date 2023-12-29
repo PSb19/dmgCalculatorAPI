@@ -26,5 +26,14 @@ namespace calculator40k.Models
             RangedWeapon = rangedWeapon;
             MeleeWeapon = meleeWeapon;
         }
+        public Model(DbModel dbModel, DbRangedWeapon rangedWeapon, DbMeleeWeapon meleeWeapon){
+            Name = dbModel.Name;
+            Toughness = dbModel.Toughness;
+            Wounds = dbModel.Wounds;
+            Save = dbModel.Save;
+            InvSave = dbModel.InvSave;
+            RangedWeapon = new RangedWeapon(rangedWeapon);
+            MeleeWeapon = new MeleeWeapon(meleeWeapon);
+        }
     }
 }

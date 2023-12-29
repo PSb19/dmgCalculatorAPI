@@ -62,9 +62,10 @@ public class ReturnController : ControllerBase{
             var dbRangedWeapon = await _context.RangedWeapons.Where(rw => dbModel.RangedWeaponId == rw.ID).FirstAsync();
             var dbMeleeWeapon = await _context.MeleeWeapons.FindAsync(dbModel.MeleeWeaponId);
             //change to use dbRW, dbMw
-            Unit unit = new Unit();
+            Unit unit = new Unit(dbUnit, dbModel, dbRangedWeapon, dbMeleeWeapon);
+            units.Add(unit);
         }
-        return NoContent();
+        return units;
     }
 
     
