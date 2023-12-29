@@ -17,6 +17,15 @@ namespace calculator40k.Models
         public MeleeWeapon? MeleeWeapon {get; set;}
 
         public Model(){}
+        public Model(DbModel dbModel){
+            Name = dbModel.Name;
+            Toughness = dbModel.Toughness;
+            Wounds = dbModel.Wounds;
+            Save = dbModel.Save;
+            InvSave = dbModel.InvSave;
+            RangedWeapon = null;
+            MeleeWeapon = null;
+        }
         public Model(DbModel dbModel, RangedWeapon? rangedWeapon = null, MeleeWeapon? meleeWeapon = null){
             Name = dbModel.Name;
             Toughness = dbModel.Toughness;
