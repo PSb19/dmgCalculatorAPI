@@ -27,7 +27,8 @@ public class CalculationController : ControllerBase{
         var dbModel = await _context.Models.Where(m => dbUnit.ID == m.UnitID).FirstAsync();
         var dbRangedWeapon = await _context.RangedWeapons.Where(rw => dbModel.RangedWeaponId == rw.ID).FirstAsync();
         var dbMeleeWeapon = await _context.MeleeWeapons.FindAsync(dbModel.MeleeWeaponId);
-        Unit unit = new Unit(dbUnit, dbModel, dbRangedWeapon, dbMeleeWeapon);
+        dbMeleeWeapon ??= new();
+        Unit unit = new(dbUnit, dbModel, dbRangedWeapon, dbMeleeWeapon);
 
         return unit;
     }
@@ -45,16 +46,18 @@ public class CalculationController : ControllerBase{
         var dbModelAttacker = await _context.Models.Where(m => dbAttacker.ID == m.UnitID).FirstAsync();
         var dbModelDefender = await _context.Models.Where(m => dbDefender.ID == m.UnitID).FirstAsync();
         var dbRangedWeaponAttacker = await _context.RangedWeapons.Where(rw => dbModelAttacker.RangedWeaponId == rw.ID).FirstAsync();
-        var dbMeleeWeaponAttacker = await _context.MeleeWeapons.FindAsync(dbModelAttacker.MeleeWeaponId);
+        var dbMeleeWeaponAttacker = await _context.MeleeWeapons.FindAsync(dbModelAttacker.MeleeWeaponId) ?? new();
         Unit unitAttacker = new(dbAttacker, dbModelAttacker, dbRangedWeaponAttacker, dbMeleeWeaponAttacker);
         Unit unitDefender = new(dbDefender, dbModelDefender);
-        List<Unit> units = new();
-        units.Add(unitAttacker);
-        units.Add(unitDefender);
+        List<Unit> units = new()
+        {
+            unitAttacker,
+            unitDefender
+        };
         return units;
     }
     
-    private Values CalculateTotalHitsScored(int skill, ComplexValue attacks, ComplexValue sustainedHitsValue, bool hasTorrent){
+    private static Values CalculateTotalHitsScored(int skill, ComplexValue attacks, ComplexValue sustainedHitsValue, bool hasTorrent){
         Values values = new();
         double totalAttacks = attacks.SolveValue();
         // hits from torrent (ranged weapons)
@@ -67,14 +70,14 @@ public class CalculationController : ControllerBase{
             double criticalHits = totalAttacks / 6;
             values.Critical = criticalHits;
             // hits from sustained hits
-            if(sustainedHitsValue.isNotZero()){
+            if(sustainedHitsValue.IsNotZero()){
                 double extraHits = criticalHits * sustainedHitsValue.SolveValue();
                 values.Normal += extraHits;
             }
         }
         return values;
     }
-    private Values CalculateTotalWoundsScored(int Strength, int Toughness, Values hits, bool hasLethalHits, int antiValue){
+    private static Values CalculateTotalWoundsScored(int Strength, int Toughness, Values hits, bool hasLethalHits, int antiValue){
         //calculate toWound:
         Values values = new();
         int toWound = 4;

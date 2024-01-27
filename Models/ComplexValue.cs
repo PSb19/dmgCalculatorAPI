@@ -15,5 +15,11 @@ namespace calculator40k.Models
         public double ToNumerical(){
             return 1.0; //TODO: update when the time comes
         }
+        public double SolveValue(){
+            return 0;
+        }
+        public bool IsNotZero(){
+            return true;
+        }
     }
 }

@@ -60,9 +60,9 @@ public class ReturnController : ControllerBase{
         {
             var dbModel = await _context.Models.Where(m => dbUnit.ID == m.UnitID).FirstAsync();
             var dbRangedWeapon = await _context.RangedWeapons.Where(rw => dbModel.RangedWeaponId == rw.ID).FirstAsync();
-            var dbMeleeWeapon = await _context.MeleeWeapons.FindAsync(dbModel.MeleeWeaponId);
+            var dbMeleeWeapon = await _context.MeleeWeapons.FindAsync(dbModel.MeleeWeaponId) ?? new();
             //change to use dbRW, dbMw
-            Unit unit = new Unit(dbUnit, dbModel, dbRangedWeapon, dbMeleeWeapon);
+            Unit unit = new(dbUnit, dbModel, dbRangedWeapon, dbMeleeWeapon);
             units.Add(unit);
         }
         return units;
